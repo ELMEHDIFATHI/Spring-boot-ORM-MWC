@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http:/www.thymeleaf.org/extras/spring-security"
+      layout:decorate="template1"
+>
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="/webjars/bootstrap/5.1.3/css/bootstrap.min.css">
+</head>
+<body>
+<div layout:fragment="content1">
+    <div class="container mt-5">
+        <div class="card">
+            <div class="card-header">Liste des patients</div>
+            <a class="nav-link active" th:href="@{/admin/formRendezvous}">add new Rendez_vous</a>
+            <div class="card-body">
+                <form method="get" th:action="@{/user/rendivouss}">
+                    <label>Mey word</label>
+                    <input type="text" name="keyword" th:value="${keyword}">
+                    <button type="submit" class="btn btn-success">cherche</button>
+
+
+
+                </form>
+
+
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>date</th>
+                        <th>rdv</th>
+                        <th>medcin</th>
+                        <th>patient</th>
+                        <th>Action</th>
+                    </tr>
+
+                    </thead>
+                    <tbody>
+                    <tr th:each="p:${listRendezvous}">
+                        <td th:text="${p.id}"></td>
+                        <td th:text="${p.date}"></td>
+                        <td th:text="${p.rdv}"></td>
+                        <td th:text="${p.medecin.getNom()}"></td>
+                        <td th:text="${p.patient.getNom()}"></td>
+
+
+                        <td sec:authorize="hasAuthority('ADMIN')">
+                            <a onclick="return confirm('Etes vous sure ?')" class="btn btn-danger"  th:href="@{/admin/deleterendivous(id=${p.id},keyword=${keyword},page=${currentPage})}">
+                                Delete
+                            </a>
+                        </td>
+                        <td sec:authorize="hasAuthority('ADMIN')">
+                            <a  class="btn btn-success"  th:href="@{/admin/editRendez(id=${p.id},keyword=${keyword},page=${currentPage})}">
+                                Edit
+                            </a>
+                        </td>
+
+                        <td sec:authorize="hasAuthority('ADMIN')">
+                            <a  class="btn btn-primary"   th:href="@{/admin/detailRendezvous(id=${p.id})}" >
+                                Detail
+                            </a>
+                        </td>
+
+                    </tr>
+
+                    </tbody>
+
+
+                </table>
+                <ul class="nav nav-pills">
+                    <li th:each="page,status:${pages}">
+                        <a th:class="${status.index==currentPage?'btn btn-primary ms-1':'btn btn-outline-primary ms-1'}"
+                           th:text="${status.index}"
+                           th:href="@{index(page=${status.index},keyword=${keyword})}"
+
+                        ></a>
+                    </li>
+
+                </ul>
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+
+</div>
+
+</body>
+</html>

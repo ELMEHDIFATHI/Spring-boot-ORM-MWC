@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="template1"
+>
+<head>
+    <meta charset="UTF-8">
+    <title>Form Patients</title>
+    <link rel="stylesheet" href="/webjars/bootstrap/5.1.3/css/bootstrap.min.css">
+</head>
+<body>
+<div layout:fragment="content1">
+
+    <div class="col-md-3 offset-4 ">
+        <form method="post" class="mt-5" th:action="@{/admin/saveconsultation}">
+            <div class="form-outline mb-4">
+                <label>Rapport</label>
+                <input id="email" class="form-control" type="text" name="Rapport" th:value="${consultation.getRapport()}">
+                <span  class="text-danger"  th:errors="${consultation.getRapport()}"></span>
+            </div>
+            <div class="form-outline mb-4">
+                <label>date consultation</label>
+                <input  class="form-control" type="text" name="DateConsultation" th:value="${consultation.getDateConsultation()}">
+                <span  class="text-danger"  th:errors="${consultation.getDateConsultation()}"></span>
+            </div>
+            <div class="form-outline mb-4">
+                <label>Rendezvous</label>
+                <input id="Rendezvous" class="form-control" type="text" name="Rendezvous" th:value="${consultation.getRendezvous()}">
+                <span class="text-danger" th:errors="${consultation.getRendezvous()}"></span>
+            </div>
+            <button type="submit" class="btn btn-primary">Save</button>
+
+        </form>
+    </div>
+</div>
+
+</body>
+</html>

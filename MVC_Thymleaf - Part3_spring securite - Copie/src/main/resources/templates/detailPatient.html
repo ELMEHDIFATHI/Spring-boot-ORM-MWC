@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="template1"
+>
+<head>
+    <meta charset="UTF-8">
+    <title>Form Patients</title>
+
+</head>
+<body>
+<div layout:fragment="content1">
+    <div class="col-md-6 offset-3">
+
+        <form method="get" th:action="@{/user/index}">
+            <div>
+                <label>id</label>
+                <input  class="form-control" type="text" name="id" th:value="${patient.id}" disabled>
+                <span  class="text-danger"  th:errors="${patient.id}"></span>
+
+            </div>
+            <div>
+                <label for="nom">nom</label>
+                <input id="nom" class="form-control" type="text" name="nom" th:value="${patient.nom}" disabled>
+                <span  class="text-danger"  th:errors="${patient.nom}"></span>
+            </div>
+            <div>
+                <label>date naissance</label>
+                <input  class="form-control" type="date" name="dateNaissance" th:value="${patient.dateNaissance}" disabled>
+                <span  class="text-danger"  th:errors="${patient.dateNaissance}"></span>
+            </div>
+            <div>
+                <label>malade</label>
+                <input  type="checkbox" name="malade" th:checked="${patient.malade}" disabled>
+                <span   th:errors="${patient.malade}"></span>
+            </div>
+            <div>
+                <label for="scoor">scoor</label>
+                <input id="scoor" class="form-control" type="text" name="scoor" th:value="${patient.scoor}" disabled>
+                <span class="text-danger" th:errors="${patient.scoor}"></span>
+            </div>
+            <button type="submit" class="btn btn-warning">exit</button>
+
+        </form>
+    </div>
+</div>
+
+</body>
+</html>

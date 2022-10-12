@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="template1"
+>
+<head>
+    <meta charset="UTF-8">
+    <title>Form Patients</title>
+
+</head>
+<body>
+<div layout:fragment="content1">
+    <div class="col-md-6 offset-3">
+
+        <form method="post" th:action="@{/admin/saveR(page=${page},keyword=${keyword})}">
+            <div>
+                <label>id</label>
+                <input  class="form-control" type="hidden"  name="id" th:value="${rendezvous.id}" >
+                <span  class="text-danger"  th:errors="${rendezvous.id}"></span>
+
+            </div>
+            <div>
+                <label >date</label>
+                <input id="date" class="form-control" type="text" name="date" th:value="${rendezvous.date}" >
+                <span  class="text-danger"  th:errors="${rendezvous.date}"></span>
+            </div>
+            <div>
+                <label>rdv</label>
+                <input  class="form-control" type="text" name="rdv" th:value="${rendezvous.rdv}" >
+                <span  class="text-danger"  th:errors="${rendezvous.rdv}"></span>
+            </div>
+            <div class="form-outline mb-4">
+                <label>patient</label>
+                <select class="form-control" id="ddlStateAdd" name="patient">
+                    <option>-SELECT-</option>
+                    <option th:each="patient : ${listPatient}"
+                            th:value="${patient.id}"
+                            th:text="${patient.getNom()}">
+                    </option>
+                </select>
+            </div>
+            <div class="form-outline mb-4">
+                <label>medcin</label>
+                <select class="form-control" id="ddlStateAdd2" name="medecin">
+                    <option>-SELECT-</option>
+                    <option th:each="m : ${listMedcins}"
+                            th:value="${m.id}"
+                            th:text="${m.getNom()}">
+                    </option>
+                </select>
+            </div>
+
+
+            <button type="submit" class="btn btn-primary">Save</button>
+
+        </form>
+    </div>
+</div>
+
+</body>
+</html>

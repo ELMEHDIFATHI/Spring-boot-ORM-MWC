@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="template1"
+>
+<head>
+    <meta charset="UTF-8">
+    <title>Form Patients</title>
+
+</head>
+<body>
+<div layout:fragment="content1">
+    <div class="col-md-6 offset-3">
+
+        <form method="get" th:action="@{/user/index}">
+            <div>
+                <label>id</label>
+                <input  class="form-control" type="text" name="id" th:value="${medcin.id}" disabled>
+                <span  class="text-danger"  th:errors="${medcin.id}"></span>
+
+            </div>
+            <div>
+                <label >email</label>
+                <input id="email" class="form-control" type="text" name="email" th:value="${medcin.email}" disabled>
+                <span  class="text-danger"  th:errors="${medcin.email}"></span>
+            </div>
+            <div>
+                <label>nom</label>
+                <input  class="form-control" type="text" name="nom" th:value="${medcin.nom}" disabled>
+                <span  class="text-danger"  th:errors="${medcin.nom}"></span>
+            </div>
+
+            <div>
+                <label>specialite</label>
+                <input id="specialite" class="form-control" type="text" name="specialite" th:value="${medcin.specialite}" disabled>
+                <span class="text-danger" th:errors="${medcin.specialite}"></span>
+            </div>
+            <button type="submit" class="btn btn-warning">exit</button>
+
+        </form>
+    </div>
+</div>
+
+</body>
+</html>
